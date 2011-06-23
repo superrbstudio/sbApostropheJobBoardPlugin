@@ -1,0 +1,26 @@
+generator:
+  class: sfDoctrineGenerator
+  param:
+    model_class:           sbJobBoardJob
+    theme:                 aAdmin
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          sb_job_board_job
+    with_doctrine_route:   true
+    actions_base_class:    sfActions
+
+    config:
+      actions: ~
+      fields:  ~
+      list:    
+        title:    "Job Board Admin"
+        display:  [ reference, title, type, created_at, updated_at ]
+      filter:
+        fields:   [ reference, title, type ]
+        display:  [ reference, title, type ]
+      form:    ~
+      edit:    ~
+      new:
+        title:    "Post a new job vacancy"

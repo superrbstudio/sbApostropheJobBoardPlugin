@@ -1,0 +1,8 @@
+.a-admin-generator.sbJobBoardJobAdmin .a-subnav-wrapper.admin {
+	display: none;
+}
+
+.a-admin-generator.sbJobBoardJobAdmin .a-content, .a-admin-generator.sbJobBoardJobAdmin .a-admin-content {
+	width: 100%;
+}
+

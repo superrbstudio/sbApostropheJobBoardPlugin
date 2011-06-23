@@ -1,0 +1,61 @@
+options:
+  type: INNODB
+  
+sbJobBoardJob:
+  actAs:
+    Timestampable: ~
+    Taggable: ~
+  columns:
+    id:
+      type: integer
+      primary: true
+      autoincrement: true
+    author_id:
+      type: integer
+    active:
+      type: boolean
+      default: false
+    reference:
+      type: string(255)
+      notnull: true
+    title:
+      type: string(255)
+      notnull: true
+    type:
+      type: enum
+      values: [ Contract, Permanent, Temporary ]
+      default: Permanent
+    duration:
+      type: string(255)
+    startdate:
+      type: date
+    location:
+      type: string(255)
+    industry:
+      type: string(255)
+    salary_currency:
+      type: enum
+      values: [ gbp, eur, usd ]
+      default: gbp
+    salary_from:
+      type: float
+    salary_to:
+      type: float
+    salary_per:
+      type: enum
+      values: [ annum, month, week, day, hour ]
+    salary_benefits:
+      type: string(255)
+  relations:
+    Author:
+      class: sfGuardUser
+      foreignAlias: JobAuthorItems
+      local: author_id
+      foreign: id
+      onDelete: SET NULL
+  indexes:
+    reference: { fields: reference }
+    title:     { fields: title }
+    active:    { fields: active }
+    
+  

@@ -1,0 +1,8 @@
+sb_job_board_job:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                sbJobBoardJob
+    module:               sbJobBoardJobAdmin
+    prefix_path:          /admin/job-board-job
+    column:               id
+    with_wildcard_routes: true
