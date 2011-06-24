@@ -1,0 +1,17 @@
+sbJobBoardJob:
+  Job1:
+    active: true
+    reference: job1
+    title: Job 1
+    type: Permanent
+    duration: ~
+    startdate: '2011-06-24'
+    location: London
+    industry: Engineering
+    salary_currency: gbp
+    salary_from: 30000
+    salary_to: 35000
+    salary_per: annum
+    salary_benefits: "+ Pension"
+    Tags: [ tag1, tag2, tag3 ]
+    Author: sgu_admin

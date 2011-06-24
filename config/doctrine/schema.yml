@@ -15,6 +15,7 @@ sbJobBoardJob:
     active:
       type: boolean
       default: false
+      notnull: true
     reference:
       type: string(255)
       notnull: true

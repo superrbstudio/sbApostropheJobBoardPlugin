@@ -16,11 +16,12 @@ generator:
       fields:  ~
       list:    
         title:    "Job Board Admin"
-        display:  [ reference, title, type, created_at, updated_at ]
+        display:  [ reference, title, active, type, created_at, updated_at ]
       filter:
-        fields:   [ reference, title, type ]
-        display:  [ reference, title, type ]
+        fields:   [ reference, title, type, active ]
+        display:  [ reference, title, type, active ]
       form:    ~
-      edit:    ~
+      edit:
+        title:    "Edit %%title%%"
       new:
         title:    "Post a new job vacancy"
