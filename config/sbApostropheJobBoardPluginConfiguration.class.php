@@ -32,10 +32,10 @@ class sbApostropheJobBoardPluginConfiguration extends sfPluginConfiguration
   {
     $user = sfContext::getInstance()->getUser();
  
-    if ($user->hasCredential('blog_author') || $user->hasCredential('blog_admin'))
+    if ($user->hasCredential('sb_job_board_admin'))
     {
       aTools::addGlobalButtons(array(
-        new aGlobalButton('sb-job-board', 'Job Board', '@sb_job_board_job', 'a-blog-btn')
+        new aGlobalButton('sb-job-board', 'Job Board', '@sb_job_board_job', 'sb-job-board-btn')
       ));
     }
   }

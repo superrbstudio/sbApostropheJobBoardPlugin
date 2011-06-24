@@ -14,7 +14,10 @@ abstract class PluginsbJobBoardJobForm extends BasesbJobBoardJobForm
 	{
     parent::setup();
 		
+		$years = range(date('Y'), date('Y') + 5);
+		
 		$this->setWidget('author_id', new sfWidgetFormInputHidden(array(), array('value' => sfContext::getInstance()->getUser()->getGuardUser()->getId())));
+		$this->setWidget('startdate', new sfWidgetFormJQueryDate(array('image' => '/sbApostropheJobBoardPlugin/images/calendar_icon.jpg', 'date_widget' => new sfWidgetFormDate(array('years' => array_combine($years, $years), 'format' => '%day%%month%%year%')), 'default' => 'today'), array('class' => 'quotefield')));
 		
 		// Tags 
 		$options['default'] = implode(', ', $this->getObject()->getTags()); 

@@ -6,3 +6,15 @@
 	width: 100%;
 }
 
+.a-admin-generator.sbJobBoardJobAdmin .a-admin-flashes {
+	background: transparent url('/apostrophePlugin/images/a-icon-error.png') no-repeat scroll left top;
+}
+
+.a-admin-generator.sbJobBoardJobAdmin #a-admin-filters-location br {
+	clear: left;
+}
+
+.alt.sb-job-board-btn > .icon {
+	background-position: -20px -1400px;
+}
+

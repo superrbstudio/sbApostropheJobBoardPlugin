@@ -5,7 +5,7 @@ sbJobBoardJob:
     title: Job 1
     type: Permanent
     duration: ~
-    startdate: '2011-06-24'
+    startdate: '<?php echo date('Y-m-d', strtotime('today')); ?>'
     location: London
     industry: Engineering
     salary_currency: gbp
@@ -15,3 +15,156 @@ sbJobBoardJob:
     salary_benefits: "+ Pension"
     Tags: [ tag1, tag2, tag3 ]
     Author: sgu_admin
+  Job2:
+    active: true
+    reference: job2
+    title: Job 2
+    type: Contract
+    duration: 6 Months
+    startdate: '<?php echo date('Y-m-d', strtotime('+1 week')); ?>'
+    location: Manchester
+    industry: Engineering
+    salary_currency: gbp
+    salary_from: 35000
+    salary_to: 38000
+    salary_per: annum
+    salary_benefits: ""
+    Tags: [ tag1, tag2, tag3 ]
+    Author: sgu_admin
+  Job3:
+    active: true
+    reference: job3
+    title: Job 3
+    type: Permanent
+    duration: ~
+    startdate: '<?php echo date('Y-m-d', strtotime('today')); ?>'
+    location: London
+    industry: Construction
+    salary_currency: gbp
+    salary_from: 25000
+    salary_to: 27000
+    salary_per: annum
+    salary_benefits: ""
+    Tags: [ tag1, tag2, tag3 ]
+    Author: sgu_admin
+  Job4:
+    active: true
+    reference: job4
+    title: Job 4
+    type: Temporary
+    duration: 3 Months
+    startdate: '<?php echo date('Y-m-d', strtotime('+1 month')); ?>'
+    location: London
+    industry: Construction
+    salary_currency: gbp
+    salary_from: 42000
+    salary_to: 45000
+    salary_per: annum
+    salary_benefits: "+ Pension"
+    Tags: [ tag1, tag2, tag3 ]
+    Author: sgu_admin
+  Job5:
+    active: true
+    reference: job5
+    title: Job 5
+    type: Permanent
+    duration: ~
+    startdate: '<?php echo date('Y-m-d', strtotime('tomorrow')); ?>'
+    location: Birmingham
+    industry: Engineering
+    salary_currency: gbp
+    salary_from: 30000
+    salary_to: 35000
+    salary_per: annum
+    salary_benefits: "+ Company Car + Performance Bonus"
+    Tags: [ tag1, tag2, tag3 ]
+    Author: sgu_admin
+  Job6:
+    active: true
+    reference: job6
+    title: Job 6
+    type: Permanent
+    duration: ~
+    startdate: '<?php echo date('Y-m-d', strtotime('+1 year')); ?>'
+    location: London
+    industry: Engineering
+    salary_currency: gbp
+    salary_from: 40000
+    salary_to: 41000
+    salary_per: annum
+    salary_benefits: ""
+    Tags: [ tag1, tag2, tag3 ]
+    Author: sgu_admin
+  Job7:
+    active: true
+    reference: job7
+    title: Job 7
+    type: Temporary
+    duration: 8 Months
+    startdate: '<?php echo date('Y-m-d', strtotime('+3 months')); ?>'
+    location: Cardiff
+    industry: Construction
+    salary_currency: gbp
+    salary_from: 25000
+    salary_to: 28000
+    salary_per: annum
+    salary_benefits: ""
+    Tags: [ tag1, tag2, tag3 ]
+    Author: sgu_admin
+  Job8:
+    active: true
+    reference: job8
+    title: Job 8
+    type: Temporary
+    duration: 2 Months
+    startdate: '<?php echo date('Y-m-d', strtotime('+7 week')); ?>'
+    location: Paris
+    industry: Construction
+    salary_currency: eur
+    salary_from: 3800
+    salary_to: 4000
+    salary_per: month
+    salary_benefits: ""
+    Tags: [ tag1, tag2, tag3 ]
+    Author: sgu_admin
+  Job9:
+    active: true
+    reference: job9
+    title: Job 9
+    type: Permanent
+    duration: ~
+    startdate: '<?php echo date('Y-m-d', strtotime('today')); ?>'
+    location: Portsmouth
+    industry: Engineering
+    salary_currency: gbp
+    salary_from: 30000
+    salary_to: 35000
+    salary_per: annum
+    salary_benefits: "+ Pension"
+    Tags: [ tag1, tag2, tag3 ]
+    Author: sgu_admin
+  Job10:
+    active: true
+    reference: job10
+    title: Job 10
+    type: Permanent
+    duration: ~
+    startdate: '<?php echo date('Y-m-d', strtotime('+ 1 week')); ?>'
+    location: Portsmouth
+    industry: Engineering
+    salary_currency: gbp
+    salary_from: 30000
+    salary_to: 35000
+    salary_per: annum
+    salary_benefits: "+ Pension"
+    Tags: [ tag1, tag2, tag3 ]
+    Author: sgu_admin
+    
+sfGuardPermission:
+  sfGuardPermission_sb_job_board_admin:
+    name: sb_job_board_admin
+    description: 'Job Board Administrator'
+sfGuardGroupPermission:  
+  sfGuardGroupPermission_admin_sb_job_board_admin:
+    Group: sfGuardGroup_admin
+    Permission: sfGuardPermission_sb_job_board_admin
