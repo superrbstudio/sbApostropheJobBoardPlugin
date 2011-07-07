@@ -13,7 +13,13 @@ generator:
 
     config:
       actions: ~
-      fields:  ~
+      fields:  
+        reference: { label: 'Job Reference ID' }
+        title:     { label: 'Position Title' }
+        type:      { label: 'Contract Type' }
+        tags:      { label: 'Keywords (Tags)' }
+        categories_list: { label: 'Industries (Categories)' }
+        
       list:    
         title:    "Job Board Admin"
         display:  [ reference, title, active, type, location, updated_at ]

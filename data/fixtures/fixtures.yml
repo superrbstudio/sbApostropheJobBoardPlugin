@@ -7,7 +7,6 @@ sbJobBoardJob:
     duration: ~
     startdate: '<?php echo date('Y-m-d', strtotime('today')); ?>'
     location: London
-    industry: Engineering
     salary_currency: gbp
     salary_from: 30000
     salary_to: 35000
@@ -15,6 +14,7 @@ sbJobBoardJob:
     salary_benefits: "+ Pension"
     Tags: [ tag1, tag2, tag3 ]
     Author: sgu_admin
+    Categories: [ Engineering ]
   Job2:
     active: true
     reference: job2
@@ -23,7 +23,6 @@ sbJobBoardJob:
     duration: 6 Months
     startdate: '<?php echo date('Y-m-d', strtotime('+1 week')); ?>'
     location: Manchester
-    industry: Engineering
     salary_currency: gbp
     salary_from: 35000
     salary_to: 38000
@@ -31,6 +30,7 @@ sbJobBoardJob:
     salary_benefits: ""
     Tags: [ tag1, tag2, tag3 ]
     Author: sgu_admin
+    Categories: [ Engineering ]
   Job3:
     active: true
     reference: job3
@@ -39,7 +39,6 @@ sbJobBoardJob:
     duration: ~
     startdate: '<?php echo date('Y-m-d', strtotime('today')); ?>'
     location: London
-    industry: Construction
     salary_currency: gbp
     salary_from: 25000
     salary_to: 27000
@@ -47,6 +46,7 @@ sbJobBoardJob:
     salary_benefits: ""
     Tags: [ tag1, tag2, tag3 ]
     Author: sgu_admin
+    Categories: [ Construction ]
   Job4:
     active: true
     reference: job4
@@ -55,7 +55,6 @@ sbJobBoardJob:
     duration: 3 Months
     startdate: '<?php echo date('Y-m-d', strtotime('+1 month')); ?>'
     location: London
-    industry: Construction
     salary_currency: gbp
     salary_from: 42000
     salary_to: 45000
@@ -63,6 +62,7 @@ sbJobBoardJob:
     salary_benefits: "+ Pension"
     Tags: [ tag1, tag2, tag3 ]
     Author: sgu_admin
+    Categories: [ Construction ]
   Job5:
     active: true
     reference: job5
@@ -71,7 +71,6 @@ sbJobBoardJob:
     duration: ~
     startdate: '<?php echo date('Y-m-d', strtotime('tomorrow')); ?>'
     location: Birmingham
-    industry: Engineering
     salary_currency: gbp
     salary_from: 30000
     salary_to: 35000
@@ -79,6 +78,7 @@ sbJobBoardJob:
     salary_benefits: "+ Company Car + Performance Bonus"
     Tags: [ tag1, tag2, tag3 ]
     Author: sgu_admin
+    Categories: [ Engineering ]
   Job6:
     active: true
     reference: job6
@@ -87,7 +87,6 @@ sbJobBoardJob:
     duration: ~
     startdate: '<?php echo date('Y-m-d', strtotime('+1 year')); ?>'
     location: London
-    industry: Engineering
     salary_currency: gbp
     salary_from: 40000
     salary_to: 41000
@@ -95,6 +94,7 @@ sbJobBoardJob:
     salary_benefits: ""
     Tags: [ tag1, tag2, tag3 ]
     Author: sgu_admin
+    Categories: [ Engineering ]
   Job7:
     active: true
     reference: job7
@@ -103,7 +103,6 @@ sbJobBoardJob:
     duration: 8 Months
     startdate: '<?php echo date('Y-m-d', strtotime('+3 months')); ?>'
     location: Cardiff
-    industry: Construction
     salary_currency: gbp
     salary_from: 25000
     salary_to: 28000
@@ -111,6 +110,7 @@ sbJobBoardJob:
     salary_benefits: ""
     Tags: [ tag1, tag2, tag3 ]
     Author: sgu_admin
+    Categories: [ Construction ]
   Job8:
     active: true
     reference: job8
@@ -119,7 +119,6 @@ sbJobBoardJob:
     duration: 2 Months
     startdate: '<?php echo date('Y-m-d', strtotime('+7 week')); ?>'
     location: Paris
-    industry: Construction
     salary_currency: eur
     salary_from: 3800
     salary_to: 4000
@@ -127,6 +126,7 @@ sbJobBoardJob:
     salary_benefits: ""
     Tags: [ tag1, tag2, tag3 ]
     Author: sgu_admin
+    Categories: [ Construction ]
   Job9:
     active: true
     reference: job9
@@ -135,7 +135,6 @@ sbJobBoardJob:
     duration: ~
     startdate: '<?php echo date('Y-m-d', strtotime('today')); ?>'
     location: Portsmouth
-    industry: Engineering
     salary_currency: gbp
     salary_from: 30000
     salary_to: 35000
@@ -143,6 +142,7 @@ sbJobBoardJob:
     salary_benefits: "+ Pension"
     Tags: [ tag1, tag2, tag3 ]
     Author: sgu_admin
+    Categories: [ Engineering ]
   Job10:
     active: true
     reference: job10
@@ -151,7 +151,6 @@ sbJobBoardJob:
     duration: ~
     startdate: '<?php echo date('Y-m-d', strtotime('+ 1 week')); ?>'
     location: Portsmouth
-    industry: Engineering
     salary_currency: gbp
     salary_from: 30000
     salary_to: 35000
@@ -159,6 +158,13 @@ sbJobBoardJob:
     salary_benefits: "+ Pension"
     Tags: [ tag1, tag2, tag3 ]
     Author: sgu_admin
+    Categories: [ Engineering ]
+    
+aCategory:
+  Engineering:
+    name: Engineering
+  Construction:
+    name: Construction
     
 sfGuardPermission:
   sfGuardPermission_sb_job_board_admin:

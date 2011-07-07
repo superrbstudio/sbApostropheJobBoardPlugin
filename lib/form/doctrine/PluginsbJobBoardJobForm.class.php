@@ -13,6 +13,7 @@ abstract class PluginsbJobBoardJobForm extends BasesbJobBoardJobForm
 	public function setup() 
 	{
     parent::setup();
+		 $user = sfContext::getInstance()->getUser();
 		
 		$years = range(date('Y'), date('Y') + 5);
 		
@@ -35,6 +36,11 @@ abstract class PluginsbJobBoardJobForm extends BasesbJobBoardJobForm
 		$options['popular-tags'] = PluginTagTable::getPopulars(null, array(), false); 
 		$this->setWidget('tags', new pkWidgetFormJQueryTaggable($options, array('class' => 'tags-input'))); 
 		$this->setValidator('tags', new sfValidatorString(array('required' => false))); 
+		
+		$q = Doctrine::getTable($this->getModelName())->addCategoriesForUser($user->getGuardUser(), $user->hasCredential('admin'));
+    $this->setWidget('categories_list', new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => $this->getModelName(), 'query' => $q)));
+    $this->setValidator('categories_list', new sfValidatorDoctrineChoice(array('multiple' => true, 'model' =>  $this->getModelName(), 'query' => $q, 'required' => false)));
+		
 		unset($this['created_at'], $this['updated_at']);
 	}
 }

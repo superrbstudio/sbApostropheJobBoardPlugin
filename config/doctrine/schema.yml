@@ -16,6 +16,10 @@ sbJobBoardJob:
       type: boolean
       default: false
       notnull: true
+    featured:
+      type: boolean
+      default: false
+      notnull: true
     reference:
       type: string(255)
       notnull: true
@@ -31,8 +35,6 @@ sbJobBoardJob:
     startdate:
       type: date
     location:
-      type: string(255)
-    industry:
       type: string(255)
     salary_currency:
       type: enum
@@ -54,9 +56,37 @@ sbJobBoardJob:
       local: author_id
       foreign: id
       onDelete: SET NULL
+    Categories:
+      foreignAlias: JobBoardJobCategories
+      class: aCategory
+      refClass: sbJobBoardJobToCategory
+      local: jobboardjob_id
+      foreign: category_id
   indexes:
     reference: { fields: reference }
     title:     { fields: title }
     active:    { fields: active }
+    
+    
+# Link the product to Apostrophe categories
+sbJobBoardJobToCategory:
+  columns:
+    jobboardjob_id:
+      type: integer
+      primary: true
+    category_id:
+      type: integer
+      primary: true
+  relations:
+    JobBoardJob:
+      foreignAlias: JobBoardJobCategories
+      class: sbJobBoardJob
+      local: jobboardjob_id
+      onDelete: CASCADE
+    Category:
+      foreignAlias: JobBoardJobCategories
+      class: aCategory
+      local: category_id
+      onDelete: CASCADE
     
   
