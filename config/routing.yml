@@ -1,3 +1,15 @@
+sb_job_board_index:
+  url: /
+  param: { module: sbJobBoardJob, action: index }
+  class: aRoute
+  
+sb_job_board_job:
+  url: /job/:slug
+  param: { module: sbJobBoardJob, action: job }
+  options: { model: sbJobBoardJob, type: object }
+  class: aDoctrineRoute
+  requirements: { slug: '[\w-]+' }
+
 sb_job_board_job:
   class: sfDoctrineRouteCollection
   options:

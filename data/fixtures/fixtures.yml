@@ -1,3 +1,5 @@
+<?php $now = date('Y-m-d H:i:s') ?>
+
 sbJobBoardJob:
   Job1:
     active: true
@@ -174,3 +176,25 @@ sfGuardGroupPermission:
   sfGuardGroupPermission_admin_sb_job_board_admin:
     Group: sfGuardGroup_admin
     Permission: sfGuardPermission_sb_job_board_admin
+    
+aPage:
+  home:
+    children:
+      shop:
+        slug: "/job-board"
+        published_at: '<?php echo $now ?>'
+        engine: sbJobBoardJob
+        Areas:
+          job_board_en_title:
+            name: title
+            culture: en
+            latest_version: 1
+            AreaVersions:
+              job_board_en_title_version_1:
+                version: 1
+                AreaVersionSlots:
+                  job_board_en_title_version_1_permid_1:
+                    permid: 1
+                    Slot:
+                      type: aText 
+                      value: "Job Board"
