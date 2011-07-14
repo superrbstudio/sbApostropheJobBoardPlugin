@@ -14,9 +14,29 @@ class PluginsbJobBoardJobTable extends Doctrine_Table
 	 */
 	public static function getInstance()
 	{
-			return Doctrine_Core::getTable('PluginsbJobBoardJob');
+			return Doctrine_Core::getTable('sbJobBoardJob');
 	}
-		
+	
+	/** 
+	 * Returns a Doctrine_Collection of jobs
+	 * 
+	 * @param integer $limit
+	 * @param boolean $active
+	 * @param boolean $expired
+	 * @param string $order
+	 * @return Doctrine_Collection 
+	 */
+	public static function getJobs($limit = 5, $active = true, $expired = false, $order = 'updated_at', $direction = 'DESC')
+	{
+		$root = Doctrine_Query::create()
+						->from('sbJobBoardJob j')
+						->where('active = ?', $active)
+						//->andWhere('') expired filter needs to go here @TODO
+						->orderBy('j.' . $order . ' ' . $direction)
+						->limit($limit);
+		return $root->execute();
+	}
+	
 	public function addCategoriesForUser(sfGuardUser $user, $admin = false)
   {
     $q = $this->addCategories();  

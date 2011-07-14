@@ -3,7 +3,7 @@ sb_job_board_index:
   param: { module: sbJobBoardJob, action: index }
   class: aRoute
   
-sb_job_board_job:
+sb_job_board_job_page:
   url: /job/:slug
   param: { module: sbJobBoardJob, action: job }
   options: { model: sbJobBoardJob, type: object }

@@ -5,6 +5,7 @@ sbJobBoardJob:
   actAs:
     Timestampable: ~
     Taggable: ~
+    Sluggable: ~
   columns:
     id:
       type: integer
