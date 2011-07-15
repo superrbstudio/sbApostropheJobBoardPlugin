@@ -26,12 +26,13 @@ class PluginsbJobBoardJobTable extends Doctrine_Table
 	 * @param string $order
 	 * @return Doctrine_Collection 
 	 */
-	public static function getJobs($limit = 5, $active = true, $expired = false, $order = 'updated_at', $direction = 'DESC')
+	public static function getJobs($limit = 5, $active = true, $featured = false, $expired = false, $order = 'updated_at', $direction = 'DESC')
 	{
 		$root = Doctrine_Query::create()
 						->from('sbJobBoardJob j')
-						->where('active = ?', $active)
+						->where('j.active = ?', $active)
 						//->andWhere('') expired filter needs to go here @TODO
+						->andWhere('j.featured = ?', $featured)
 						->orderBy('j.' . $order . ' ' . $direction)
 						->limit($limit);
 		return $root->execute();

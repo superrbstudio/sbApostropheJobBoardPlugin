@@ -13,4 +13,9 @@ abstract class BasesbJobBoardJobComponents extends sfComponents
 	{
 		$this->jobs = sbJobBoardJobTable::getJobs(5);
 	}
+	
+	public function executeHotJobs()
+	{
+		$this->jobs = sbJobBoardJobTable::getJobs(5, true, true);
+	}
 }
