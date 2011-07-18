@@ -28,14 +28,61 @@ class PluginsbJobBoardJobTable extends Doctrine_Table
 	 */
 	public static function getJobs($limit = 5, $active = true, $featured = false, $expired = false, $order = 'updated_at', $direction = 'DESC')
 	{
+		$fast = sfConfig::get('app_a_fasthydrate', false);
+		
 		$root = Doctrine_Query::create()
 						->from('sbJobBoardJob j')
-						->where('j.active = ?', $active)
-						//->andWhere('') expired filter needs to go here @TODO
-						->andWhere('j.featured = ?', $featured)
-						->orderBy('j.' . $order . ' ' . $direction)
-						->limit($limit);
-		return $root->execute();
+						->leftJoin('j.Categories a ')
+						->where(1);
+		
+		if(is_bool($active))
+		{
+			$root->andWhere('j.active = ?', $active);
+		}
+		
+		if(is_bool($featured))
+		{
+			$root->andWhere('j.featured = ?', $featured);
+		}
+		
+		if(is_bool($expired))
+		{
+			// @TODO expired filter
+		}
+		
+		if(!is_null($order) and !is_null($direction))
+		{
+			$root->orderBy('j.' . $order . ' ' . $direction);
+		}
+		
+		if(is_numeric($limit))
+		{
+			$root->limit($limit);
+		}
+		
+		return $root->execute(array(), $fast ? Doctrine::HYDRATE_ARRAY : Doctrine::HYDRATE_RECORD);
+	}
+	
+	public static function currencySymbol($currency)
+	{
+		$currency = strtolower($currency);
+		
+		switch($currency)
+		{
+			case 'gbp':
+				return '£';
+				break;
+			
+			case 'eur':
+				return '€';
+				break;
+			
+			case 'usd':
+				return '$';
+				break;
+		}
+		
+		return '¤';
 	}
 	
 	public function addCategoriesForUser(sfGuardUser $user, $admin = false)

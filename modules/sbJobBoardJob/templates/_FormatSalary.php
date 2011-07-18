@@ -1,0 +1,1 @@
+<?php echo $currencySymbol; ?><?php echo number_format($job['salary_from'], 2, '.', ','); ?> to <?php echo $currencySymbol; ?><?php echo number_format($job['salary_to'], 2, '.', ','); ?> per <?php echo $job['salary_per']; ?>

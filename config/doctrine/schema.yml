@@ -5,7 +5,10 @@ sbJobBoardJob:
   actAs:
     Timestampable: ~
     Taggable: ~
-    Sluggable: ~
+    Sluggable:
+      unique: true
+      fields: [ reference, title ]
+      canUpdate: false
   columns:
     id:
       type: integer

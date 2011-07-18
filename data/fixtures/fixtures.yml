@@ -181,7 +181,7 @@ aPage:
   home:
     children:
       shop:
-        slug: "/job-board"
+        slug: "/job-vacancies"
         published_at: '<?php echo $now ?>'
         engine: sbJobBoardJob
         Areas:
@@ -197,4 +197,4 @@ aPage:
                     permid: 1
                     Slot:
                       type: aText 
-                      value: "Job Board"
+                      value: "Vacancies"
