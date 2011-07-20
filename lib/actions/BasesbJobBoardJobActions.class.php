@@ -19,4 +19,10 @@ abstract class BasesbJobBoardJobActions extends aEngineActions
   {
 		$this->jobs = sbJobBoardJobTable::getJobs(null, true, null);
   }
+	
+	public function executeJob(sfWebRequest $request)
+	{
+		$this->job = sbJobBoardJobTable::getInstance()->findOneBySlug($request->getParameter('slug'));
+		$this->forward404Unless($this->job instanceof sbJobBoardJob);
+	}
 }
