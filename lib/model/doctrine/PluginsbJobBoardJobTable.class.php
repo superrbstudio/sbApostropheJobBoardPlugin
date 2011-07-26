@@ -63,6 +63,24 @@ class PluginsbJobBoardJobTable extends Doctrine_Table
 		return $root->execute(array(), $fast ? Doctrine::HYDRATE_ARRAY : Doctrine::HYDRATE_RECORD);
 	}
 	
+	/**
+	 * Returns an array of sbGoogleSitemapPage objects for use by the google sitemap plugin
+	 * @return array 
+	 */
+	public static function pagesForSitemap()
+	{
+		sfContext::getInstance()->getConfiguration()->loadHelpers(array('Url'));
+		$return = array();
+		$jobs = self::getJobs(null, true, null);
+		
+		foreach($jobs as $job)
+		{
+			$return[] = new sbGoogleSitemapPage(sfContext::getInstance()->getRequest()->getHost(), url_for('@sb_job_board_job_page?slug=' . $job['slug']), false, 'monthly', 0.8, strtotime($job['updated_at']));
+		}
+		
+		return $return;
+	}
+	
 	public static function currencySymbol($currency)
 	{
 		$currency = strtolower($currency);
