@@ -39,16 +39,18 @@ abstract class BasesbJobBoardApplicationActions extends BaseaActions
 
 	protected function sendEmail(sfWebRequest $request)
 	{
+		$info = sfConfig::get('app_a_sb_job_board_application');
+		$file = explode('/', $this->form->getValue('cv_file'));
 		$content  = "Contact Name.......: " . $this->form->getValue('name') . "\n";
 		$content .= "Contact Email......: " . $this->form->getValue('email') . "\n";
 		$content .= "Contact Number.....: " . $this->form->getValue('phone_number') . "\n";
-		$content .= "CV File............: " . $request->getUriPrefix() . '/web/cvs/' . $this->form->getValue('cv_file') . "\n";
+		$content .= "CV File............: " . $request->getUriPrefix() . '/uploads/cvs/' . $file[count($file) - 1] . "\n";
 		$content .= "....................\n";
 		$content .= "Sent at " . date('Y-m-d H:i:s');
 
 		try
 		{
-			$this->getMailer()->composeAndSend($this->form->getValue('email'), sfConfig::get('app_a_sb_job_board_application_contact_email'), 'New CV from ' . $request->getHost(), $content);
+			$this->getMailer()->composeAndSend($this->form->getValue('email'), $info['contact_email'], 'New CV from ' . $request->getHost(), $content);
 		}
 		catch (Exception $e)
 		{
