@@ -112,12 +112,10 @@ sbJobBoardApplication:
       type: string(100)
       notnull: true
     job_type:
-      type: string(1000)
-      default: "General Enquiry"
+      type: string(255)
       notnull: true
     cv_file:
       type: string(255)
-      default: "NA"
-      notnull: true
+      notnull: false
     
   

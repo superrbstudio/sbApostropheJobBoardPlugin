@@ -18,3 +18,7 @@ sb_job_board_job:
     prefix_path:          /admin/job-board-job
     column:               id
     with_wildcard_routes: true
+    
+sb_job_board_application:
+  url: /job/application
+  param: { module: sbJobBoardApplication, action: application }
