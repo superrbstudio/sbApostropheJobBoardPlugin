@@ -12,7 +12,7 @@ abstract class BasesbJobBoardApplicationComponents extends sfComponents
 	public function executeApplicationForm()
 	{
 		$this->edit = false;
-		$this->showThanks = true;
+		$this->showThanks = false;
 
 		// is the user authenticated and able to edit the form content
 		if($this->getUser()->isAuthenticated())
