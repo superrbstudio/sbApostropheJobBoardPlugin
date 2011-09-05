@@ -23,39 +23,37 @@ abstract class BasesbJobBoardApplicationActions extends BaseaActions
 		{
 			// save details and send email
 			$this->form->save();
-			if($this->sendEmail())
+
+			if($this->sendEmail($request))
 			{
-				$this->getUser()->setFlash('form_success', true);
+				$this->getUser()->setFlash('email_success', true);
 			}
 			else
 			{
-				$this->getUser()->setFlash('form_success', false);
+				$this->getUser()->setFlash('email_success', false);
 			}
 		}
 
 		$this->redirect(url_for('/candidates#candidates-application-form'));
 	}
 
-	protected function sendEmail()
+	protected function sendEmail(sfWebRequest $request)
 	{
 		$content  = "Contact Name.......: " . $this->form->getValue('name') . "\n";
 		$content .= "Contact Email......: " . $this->form->getValue('email') . "\n";
 		$content .= "Contact Number.....: " . $this->form->getValue('phone_number') . "\n";
+		$content .= "CV File............: " . $request->getUriPrefix() . '/web/cvs/' . $this->form->getValue('cv_file') . "\n";
 		$content .= "....................\n";
 		$content .= "Sent at " . date('Y-m-d H:i:s');
 
 		$message = Swift_Message::newInstance()
 								->setFrom($this->form->getValue('email'))
 								->setTo(sfConfig::get('app_a_sb_job_board_application_contact_email'))
-								->setSubject('New CV from ' . $_SERVER['SERVER_NAME'])
-								->setBody($content)
-								->attach(Swift_Attachment::fromPath($this->form->getValue('cv_file')));
+								->setSubject('New CV from ' . $request->getHost())
+								->setBody($content);
+								//->attach(Swift_Attachment::fromPath($this->form->getValue('cv_file')));
 
-		try
-		{
-			$this->getMailer()->send($message);
-		}
-		catch (Exception $e)
+		if(!$this->getMailer()->send($message))
 		{
 			return false;
 		}

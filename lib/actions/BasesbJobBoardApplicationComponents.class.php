@@ -11,8 +11,9 @@ abstract class BasesbJobBoardApplicationComponents extends sfComponents
 {
 	public function executeApplicationForm()
 	{
-		$this->edit = false;
-		$this->showThanks = false;
+		$this->edit              = false;
+		$this->showThanks        = false;
+		$this->displayEmailError = false;
 
 		// is the user authenticated and able to edit the form content
 		if($this->getUser()->isAuthenticated())
@@ -31,9 +32,13 @@ abstract class BasesbJobBoardApplicationComponents extends sfComponents
 		}
 
 		// Should we display the form success
-		if($this->getUser()->getFlash('form_success') == true)
+		if($this->getUser()->getFlash('email_success') == true)
 		{
 			$this->showThanks = true;
+		}
+		else
+		{
+			$this->displayEmailError = true;
 		}
 	}
 }
