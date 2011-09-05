@@ -32,13 +32,16 @@ abstract class BasesbJobBoardApplicationComponents extends sfComponents
 		}
 
 		// Should we display the form success
-		if($this->getUser()->getFlash('email_success') == true)
+		if(!is_null($this->getUser()->getFlash('email_success')))
 		{
-			$this->showThanks = true;
-		}
-		else
-		{
-			$this->displayEmailError = true;
+			if($this->getUser()->getFlash('email_success') == true)
+			{
+				$this->showThanks = true;
+			}
+			elseif($this->getUser()->getFlash('email_success') == false)
+			{
+				$this->displayEmailError = true;
+			}
 		}
 	}
 }
