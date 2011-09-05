@@ -46,14 +46,11 @@ abstract class BasesbJobBoardApplicationActions extends BaseaActions
 		$content .= "....................\n";
 		$content .= "Sent at " . date('Y-m-d H:i:s');
 
-		$message = Swift_Message::newInstance()
-								->setFrom($this->form->getValue('email'))
-								->setTo(sfConfig::get('app_a_sb_job_board_application_contact_email'))
-								->setSubject('New CV from ' . $request->getHost())
-								->setBody($content);
-								//->attach(Swift_Attachment::fromPath($this->form->getValue('cv_file')));
-
-		if(!$this->getMailer()->send($message))
+		try
+		{
+			$this->getMailer()->composeAndSend($this->form->getValue('email'), sfConfig::get('app_a_sb_job_board_application_contact_email'), 'New CV from ' . $request->getHost(), $content);
+		}
+		catch (Exception $e)
 		{
 			return false;
 		}
