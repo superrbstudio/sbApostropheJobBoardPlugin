@@ -66,10 +66,38 @@ sbJobBoardJob:
       refClass: sbJobBoardJobToCategory
       local: jobboardjob_id
       foreign: category_id
+    aSearchDocuments:
+      class: aSearchDocument
+      refClass: sbJobBoardJobToASearchDocument
+      foreign: a_search_document_id
+      local: sb_job_board_job_id
   indexes:
     reference: { fields: reference }
     title:     { fields: title }
     active:    { fields: active }
+    
+sbJobBoardJobToASearchDocument:
+  columns:
+    a_search_document_id:
+      type: integer
+    # Must be your table name followed by _id
+    sb_job_board_job_id:
+      type: integer
+  relations:
+    aSearchDocument:
+      local: a_search_document_id
+      foreign: id
+      class: aSearchDocument
+      onDelete: cascade
+    sbJobBoardJob:
+      local: sb_job_board_job_id
+      foreign: id
+      class: sbJobBoardJob
+      onDelete: cascade
+  options:
+    symfony:
+      form:   false
+      filter: false
     
     
 # Link the product to Apostrophe categories
@@ -117,5 +145,6 @@ sbJobBoardApplication:
     cv_file:
       type: string(255)
       notnull: false
+    
     
   

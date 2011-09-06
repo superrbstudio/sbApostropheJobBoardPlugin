@@ -28,6 +28,13 @@ abstract class BasesbJobBoardJobComponents extends sfComponents
 
 	public function executeBasicSearch()
 	{
+		$this->form = new sbJobBoardJobSearchForm();
+		$this->form->bind($this->getRequest()->getParameter('search'));
+	}
 
+	public function executeSearch()
+	{
+		$this->form = new sbJobBoardJobSearchForm();
+		$this->form->bind($this->getRequest()->getParameter('search'));
 	}
 }

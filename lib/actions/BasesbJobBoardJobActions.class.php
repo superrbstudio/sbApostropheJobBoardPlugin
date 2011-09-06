@@ -13,13 +13,21 @@ abstract class BasesbJobBoardJobActions extends aEngineActions
  /**
   * Executes index action
   *
-  * @param sfRequest $request A request object
+  * @param sfWebRequest $request
   */
   public function executeIndex(sfWebRequest $request)
   {
-		$this->jobs = sbJobBoardJobTable::getJobs(null, true, null);
+		$params = array();
+
+		// are there parameters
+		if($request->getParameter('search') != '')
+		{
+			$params = $request->getParameter('search');
+		}
+
+		$this->jobs = sbJobBoardJobTable::getJobs(null, true, null, false, 'updated_at', 'DESC', $params);
   }
-	
+
 	public function executeJob(sfWebRequest $request)
 	{
 		$this->job = sbJobBoardJobTable::getInstance()->findOneBySlug($request->getParameter('slug'));
