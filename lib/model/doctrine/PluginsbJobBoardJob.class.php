@@ -14,7 +14,19 @@ abstract class PluginsbJobBoardJob extends BasesbJobBoardJob
 {
 	public function getSearchText()
 	{
-		return $this->getTitle() . implode(' ', $this->getTags());
+		$slotContent = '';
+
+		$page = aPageTable::retrieveBySlugWithSlots(aPageTable::getFirstEnginePage('sbJobBoardJob')->slug . "/" . $this->getSlug());
+
+		if($page)
+		{
+			foreach($page->getArea('jobDescription') as $slot)
+			{
+				$slotContent .= ' ' . $slot->getText();
+			}
+		}
+
+		return $this->getTitle() . " " . $slotContent . " " . $this->getSalaryBenefits() . " " . implode(' ', $this->getTags());
 	}
 
 	public function getSummary()

@@ -37,4 +37,16 @@ abstract class BasesbJobBoardJobComponents extends sfComponents
 		$this->form = new sbJobBoardJobSearchForm();
 		$this->form->bind($this->getRequest()->getParameter('search'));
 	}
+
+	public function executeRelatedJobs()
+	{
+		$tags = array();
+
+		foreach($this->job->getTags() as $tag)
+		{
+			$tags[] = $tag;
+		}
+
+		$this->jobs = PluginTagTable::getObjectTaggedWith(implode(',', $tags), array('nb_common_tags' => 1, 'model' => 'sbJobBoardJob', 'limit' => 4));
+	}
 }

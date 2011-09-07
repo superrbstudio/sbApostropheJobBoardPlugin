@@ -18,6 +18,7 @@ abstract class BasesbJobBoardJobActions extends aEngineActions
   public function executeIndex(sfWebRequest $request)
   {
 		$params = array();
+		$this->getResponse()->addJavascript('/js/jquery/jquery.quicksand.js');
 
 		// are there parameters
 		if($request->getParameter('search') != '')
@@ -30,6 +31,7 @@ abstract class BasesbJobBoardJobActions extends aEngineActions
 
 	public function executeJob(sfWebRequest $request)
 	{
+		$this->edit = $this->getUser()->isAuthenticated();
 		$this->job = sbJobBoardJobTable::getInstance()->findOneBySlug($request->getParameter('slug'));
 		$this->forward404Unless($this->job instanceof sbJobBoardJob);
 	}

@@ -33,3 +33,4 @@ generator:
         display:   [ active, featured, reference, title, type, duration, startdate, location, salary_currency, salary_from, salary_to, salary_per, salary_benefits, categories_list, tags, _description ]
       new:
         title:    "Post a new job vacancy"
+        display:   [ active, featured, reference, title, type, duration, startdate, location, salary_currency, salary_from, salary_to, salary_per, salary_benefits, categories_list, tags ]
