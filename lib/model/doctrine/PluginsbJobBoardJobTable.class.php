@@ -48,6 +48,21 @@ class PluginsbJobBoardJobTable extends Doctrine_Table
 		return $sectors;
 	}
 
+	public static function getJobTypes()
+	{
+		$types = array();
+
+		$root = Doctrine_Query::create()
+						->select('j.type AS the_name')
+						->from('sbJobBoardJob j')
+						->groupBy('j.type')
+						->orderBy('j.type');
+
+		$typs = $root->execute(array(), Doctrine::HYDRATE_ARRAY);
+		foreach($typs as $type){ $types[$type['the_name']] = $type['the_name']; }
+		return $types;
+	}
+
 	/**
 	 * Returns a Doctrine_Collection of jobs
 	 *

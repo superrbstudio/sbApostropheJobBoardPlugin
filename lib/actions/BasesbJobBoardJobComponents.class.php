@@ -35,7 +35,22 @@ abstract class BasesbJobBoardJobComponents extends sfComponents
 	public function executeSearch()
 	{
 		$this->form = new sbJobBoardJobSearchForm();
-		$this->form->bind($this->getRequest()->getParameter('search'));
+
+		// crazy hack because defaults aren't working for some reason?
+		if($this->getRequest()->getParameter('search') == '')
+		{
+			$param = array('keywords' => '',
+										 'location' => 'any',
+										 'sector' => 'any',
+										 'job_type' => 'any',
+										 'times' => date('Y-m-d', strtotime('-14 days')));
+		}
+		else
+		{
+			$param = $this->getRequest()->getParameter('search');
+		}
+
+		$this->form->bind($param);
 	}
 
 	public function executeRelatedJobs()
