@@ -28,7 +28,15 @@ abstract class BasesbJobBoardApplicationComponents extends sfComponents
 		}
 		else
 		{
-			$this->form = new sbJobBoardApplicationForm();
+			$application = null;
+
+			if($this->getRequest()->getParameter('applicationId') != '')
+			{
+				$application = new sbJobBoardApplication();
+				$application->setJobType($this->getRequest()->getParameter('applicationId'));
+			}
+
+			$this->form = new sbJobBoardApplicationForm($application);
 		}
 
 		// Should we display the form success
