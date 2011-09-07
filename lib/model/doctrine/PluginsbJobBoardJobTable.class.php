@@ -40,8 +40,7 @@ class PluginsbJobBoardJobTable extends Doctrine_Table
 						->select('c.name as the_name, j.id')
 						->from('sbJobBoardJob j')
 						->innerJoin('j.Categories c')
-						->groupBy('c.name')
-						->orderBy('c.name');
+						->orderBy('the_name');
 
 		$sects = $root->execute(array(), Doctrine::HYDRATE_ARRAY);
 		foreach($sects as $sector){ $sectors[$sector['the_name']] = $sector['the_name']; }
@@ -92,6 +91,22 @@ class PluginsbJobBoardJobTable extends Doctrine_Table
 		{
 			$root->andWhere('j.location = ?', $params['location']);
 		}
+
+		if(isset($params['sectors']) and !empty($params['sectors']) and $params['sectors'] != 'any')
+		{
+			$root->andWHere('c.name = ?', $params['sectors']);
+		}
+
+		if(isset($params['job_type']) and !empty($params['job_type']) and $params['job_type'] != 'any')
+		{
+			$root->andWHere('j.type = ?', $params['job_type']);
+		}
+
+		if(isset($params['times']) and !empty($params['times']) and $params['times'] != 'any')
+		{
+			$root->andWHere('j.updated_at >= ?', $params['times']);
+		}
+
 
 		if(is_bool($active))
 		{
