@@ -7,7 +7,7 @@ class sbJobBoardJobSearchForm extends sfForm
 		$locations = array_merge(array('any' => 'All Locations'), sbJobBoardJobTable::getLocations());
 		$sectors   = array_merge(array('any' => 'All sectors'), sbJobBoardJobTable::getSectors());
 		$types     = array_merge(array('any' => 'All types'), sbJobBoardJobTable::getJobTypes());
-		$times     = array('any' => 'All', date('Y-m-d', strtotime('-2 weeks')) => 'Last 14 days', date('Y-m-d', strtotime('-1 week')) => 'Last 7 days', date('Y-m-d', strtotime('yesterday')) => 'Yesterday', date('Y-m-d', strtotime("today")) => 'Today');
+		$times     = array('any' => 'All', date('Y-m-d', strtotime('-2 weeks')) => '14 days ago', date('Y-m-d', strtotime('-1 week')) => '7 days ago', date('Y-m-d', strtotime('yesterday')) => 'Yesterday', date('Y-m-d', strtotime("today")) => 'Today');
 
 		$this->setWidgets(array(
 			'keywords' => new sfWidgetFormInputText(array(), array('title' => 'Enter keywords to find a related job', 'class' => 'search_keywords')),
