@@ -68,7 +68,7 @@ class PluginsbJobBoardJobTable extends Doctrine_Table
 	 * @param integer $limit The number of jobs to return
 	 * @param boolean $active If the result includes active jobs
 	 * @param boolean $expired If the result includes expired jobs
-	 * @param string $order The column to use to order the results
+	 * @param string $order The column to use to order the results This is overiden when using a keyword search
 	 * @param string $direction The direction to order the results
 	 * @param array $params An array of search parameters
 	 * @return Doctrine_Collection
@@ -76,6 +76,7 @@ class PluginsbJobBoardJobTable extends Doctrine_Table
 	public static function getJobs($limit = 5, $active = true, $featured = false, $expired = false, $order = 'updated_at', $direction = 'DESC', $params = array())
 	{
 		$fast = sfConfig::get('app_a_fasthydrate', false);
+		$overideOrder = false;
 
 		$root = Doctrine_Query::create()
 						->select('j.*, c.*')
@@ -85,6 +86,7 @@ class PluginsbJobBoardJobTable extends Doctrine_Table
 		if(isset($params['keywords']) and !empty($params['keywords']))
 		{
 			aTools::$searchService->addSearchToQuery($root, $params['keywords'], array('culture' => aTools::getUserCulture()));
+			$overideOrder = true;
 		}
 
 		if(isset($params['location']) and !empty($params['location']) and $params['location'] != 'any')
@@ -125,7 +127,14 @@ class PluginsbJobBoardJobTable extends Doctrine_Table
 
 		if(!is_null($order) and !is_null($direction))
 		{
-			$root->orderBy('j.' . $order . ' ' . $direction);
+			if($overideOrder)
+			{
+				$root->orderBy('weight DESC');
+			}
+			else
+			{
+				$root->orderBy('j.' . $order . ' ' . $direction);
+			}
 		}
 
 		if(is_numeric($limit))
