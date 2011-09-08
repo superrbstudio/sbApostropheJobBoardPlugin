@@ -62,6 +62,21 @@ abstract class BasesbJobBoardJobComponents extends sfComponents
 			$tags[] = $tag;
 		}
 
-		$this->jobs = PluginTagTable::getObjectTaggedWith(implode(',', $tags), array('nb_common_tags' => 1, 'model' => 'sbJobBoardJob', 'limit' => 4));
+		$jobs = PluginTagTable::getObjectTaggedWith(implode(',', $tags), array('nb_common_tags' => 1, 'model' => 'sbJobBoardJob'));
+
+		if(!isset($this->limit) or !is_numeric($this->limit))
+		{
+			$this->limit = 4;
+		}
+
+		$i = 1;
+		$this->jobs = array();
+
+		foreach($jobs as $job)
+		{
+			$this->jobs[] = $job;
+			$i++;
+			if($i > $this->limit) { break; }
+		}
 	}
 }
