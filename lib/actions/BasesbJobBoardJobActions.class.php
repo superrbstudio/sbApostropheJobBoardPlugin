@@ -18,7 +18,6 @@ abstract class BasesbJobBoardJobActions extends aEngineActions
   public function executeIndex(sfWebRequest $request)
   {
 		$params = array();
-		$this->getResponse()->addJavascript('/js/jquery/jquery.quicksand.js');
 
 		// are there parameters
 		if($request->getParameter('search') != '')
