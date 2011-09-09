@@ -34,7 +34,7 @@ abstract class BasesbJobBoardApplicationActions extends BaseaActions
 			}
 		}
 
-		$this->redirect(url_for('/candidates#candidates-application-form'));
+		$this->redirect(url_for($request->getParameter('redirect_page')));
 	}
 
 	protected function sendEmail(sfWebRequest $request)
