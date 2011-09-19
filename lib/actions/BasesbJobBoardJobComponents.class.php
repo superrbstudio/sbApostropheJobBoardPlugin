@@ -40,6 +40,7 @@ abstract class BasesbJobBoardJobComponents extends sfComponents
 		if($this->getRequest()->getParameter('search') == '')
 		{
 			$param = array('keywords' => '',
+										 'title' => 'any',
 										 'location' => 'any',
 										 'sector' => 'any',
 										 'job_type' => 'any',

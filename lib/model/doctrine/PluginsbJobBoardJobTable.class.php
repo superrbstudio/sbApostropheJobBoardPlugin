@@ -32,6 +32,21 @@ class PluginsbJobBoardJobTable extends Doctrine_Table
 		return $locations;
 	}
 
+	public static function getTitles()
+	{
+		$titles = array();
+
+		$root = Doctrine_Query::create()
+						->select('title')
+						->from('sbJobBoardJob')
+						->groupBy('title')
+						->orderBy('title');
+
+		$tits = $root->execute(array(), Doctrine::HYDRATE_ARRAY);
+		foreach($tits as $title){ $titles[$title['title']] = $title['title']; }
+		return $titles;
+	}
+
 	public static function getSectors()
 	{
 		$sectors = array();
@@ -92,6 +107,11 @@ class PluginsbJobBoardJobTable extends Doctrine_Table
 		if(isset($params['location']) and !empty($params['location']) and $params['location'] != 'any')
 		{
 			$root->andWhere('j.location = ?', $params['location']);
+		}
+
+		if(isset($params['title']) and !empty($params['title']) and $params['title'] != 'any')
+		{
+			$root->andWhere('j.title = ?', $params['title']);
 		}
 
 		if(isset($params['sectors']) and !empty($params['sectors']) and $params['sectors'] != 'any')
