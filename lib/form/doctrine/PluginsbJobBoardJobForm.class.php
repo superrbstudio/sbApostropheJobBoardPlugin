@@ -10,37 +10,42 @@
  */
 abstract class PluginsbJobBoardJobForm extends BasesbJobBoardJobForm
 {
-	public function setup() 
+	public function setup()
 	{
     parent::setup();
-		 $user = sfContext::getInstance()->getUser();
-		
+		$user = sfContext::getInstance()->getUser();
+		sfContext::getInstance()->getConfiguration()->loadHelpers('Url');
+
 		$years = range(date('Y'), date('Y') + 5);
-		
+
 		$this->setWidget('author_id', new sfWidgetFormInputHidden(array(), array('value' => sfContext::getInstance()->getUser()->getGuardUser()->getId())));
+
+		$this->setWidget('title', new sfWidgetFormJQueryAutocompleter(array('url' => url_for('@sb_job_board_autocomplete_titles')), array()));
+		$this->setValidator('title', new sfValidatorString(array('required' => true), array()));
+		$this->setWidget('location', new sfWidgetFormJQueryAutocompleter(array('url' => url_for('@sb_job_board_autocomplete_locations')), array()));
+		$this->setValidator('location', new sfValidatorString(array('required' => true), array()));
+
 		$this->setWidget('startdate', new sfWidgetFormJQueryDate(array('image' => '/sbApostropheJobBoardPlugin/images/calendar_icon.jpg', 'date_widget' => new sfWidgetFormDate(array('years' => array_combine($years, $years), 'format' => '%day%%month%%year%')), 'default' => 'today'), array('class' => 'quotefield')));
-		
-		// Tags 
-		$options['default'] = implode(', ', $this->getObject()->getTags()); 
-		if (sfConfig::get('app_a_all_tags', true)) 
-		{ 
-			$options['all-tags'] = PluginTagTable::getAllTagNameWithCount(); 
-		} 
 
-		else 
-		{ 
-			sfContext::getInstance()->getConfiguration()->loadHelpers('Url'); 
-			$options['typeahead-url'] = url_for('taggableComplete/complete'); 
-		} 
+		// Tags
+		$options['default'] = implode(', ', $this->getObject()->getTags());
+		if (sfConfig::get('app_a_all_tags', true))
+		{
+			$options['all-tags'] = PluginTagTable::getAllTagNameWithCount();
+		}
+		else
+		{
+			$options['typeahead-url'] = url_for('taggableComplete/complete');
+		}
 
-		$options['popular-tags'] = PluginTagTable::getPopulars(null, array(), false); 
-		$this->setWidget('tags', new pkWidgetFormJQueryTaggable($options, array('class' => 'tags-input'))); 
-		$this->setValidator('tags', new sfValidatorString(array('required' => false))); 
-		
+		$options['popular-tags'] = PluginTagTable::getPopulars(null, array(), false);
+		$this->setWidget('tags', new pkWidgetFormJQueryTaggable($options, array('class' => 'tags-input')));
+		$this->setValidator('tags', new sfValidatorString(array('required' => false)));
+
 		$q = Doctrine::getTable($this->getModelName())->addCategoriesForUser($user->getGuardUser(), $user->hasCredential('admin'));
     $this->setWidget('categories_list', new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => $this->getModelName(), 'query' => $q)));
     $this->setValidator('categories_list', new sfValidatorDoctrineChoice(array('multiple' => true, 'model' =>  $this->getModelName(), 'query' => $q, 'required' => false)));
-		
+
 		unset($this['created_at'], $this['updated_at']);
 	}
 }

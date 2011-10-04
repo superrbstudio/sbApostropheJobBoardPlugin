@@ -22,3 +22,11 @@ sb_job_board_job:
 sb_job_board_application:
   url: /job/application
   param: { module: sbJobBoardApplication, action: application }
+  
+sb_job_board_autocomplete_titles:
+  url: /job-autocomplete/titles
+  param: { module: sbJobBoardJobAjax, action: ajaxJobTitles }
+  
+sb_job_board_autocomplete_locations:
+  url: /job-autocomplete/locations
+  param: { module: sbJobBoardJobAjax, action: ajaxJobLocations }
