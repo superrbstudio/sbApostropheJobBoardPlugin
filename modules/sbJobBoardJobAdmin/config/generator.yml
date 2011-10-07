@@ -30,7 +30,15 @@ generator:
       form:    ~
       edit:
         title:    "Edit %%title%%"
-        display:   [ active, featured, reference, title, type, duration, startdate, location, salary_currency, salary_from, salary_to, salary_per, salary_benefits, categories_list, tags, _description ]
+        display:
+          Job Status: [ active, featured]
+          Job Details: [ reference, title, type, duration, startdate, location ]
+          Salary Details: [ salary_currency, salary_from, salary_to, salary_per, salary_benefits ]
+          Categories & Tags: [ categories_list, tags, _description ]
       new:
         title:    "Post a new job vacancy"
-        display:   [ active, featured, reference, title, type, duration, startdate, location, salary_currency, salary_from, salary_to, salary_per, salary_benefits, categories_list, tags ]
+        display:
+          Job Status: [ active, featured]
+          Job Details: [ reference, title, type, duration, startdate, location ]
+          Salary Details: [ salary_currency, salary_from, salary_to, salary_per, salary_benefits ]
+          Categories & Tags: [ categories_list, tags ]

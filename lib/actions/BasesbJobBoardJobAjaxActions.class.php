@@ -23,4 +23,26 @@ abstract class BasesbJobBoardJobAjaxActions extends BaseaActions
 		$this->getResponse()->setContent(json_encode($keylessLocations));
 		return sfView::NONE;
 	}
+
+	public function executeAjaxJobDurations(sfWebRequest $request)
+	{
+		$this->forward404Unless($this->getUser()->isAuthenticated());
+		$this->getResponse()->setHttpHeader('Content-Type','application/json; charset=utf-8');
+		$keylessDurations = array();
+		$durations = sbJobBoardJobTable::getDurations();
+		foreach($durations as $duration){$keylessDurations[] = $duration;}
+		$this->getResponse()->setContent(json_encode($keylessDurations));
+		return sfView::NONE;
+	}
+
+	public function executeAjaxJobSalaryBenefits(sfWebRequest $request)
+	{
+		$this->forward404Unless($this->getUser()->isAuthenticated());
+		$this->getResponse()->setHttpHeader('Content-Type','application/json; charset=utf-8');
+		$keylessSalaryBenefits = array();
+		$benefits = sbJobBoardJobTable::getSalaryBenefits();
+		foreach($benefits as $benefit){$keylessSalaryBenefits[] = $benefit;}
+		$this->getResponse()->setContent(json_encode($keylessSalaryBenefits));
+		return sfView::NONE;
+	}
 }

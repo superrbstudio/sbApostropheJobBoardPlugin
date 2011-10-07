@@ -47,6 +47,36 @@ class PluginsbJobBoardJobTable extends Doctrine_Table
 		return $titles;
 	}
 
+	public static function getDurations()
+	{
+		$durations = array();
+
+		$root = Doctrine_Query::create()
+						->select('duration')
+						->from('sbJobBoardJob')
+						->groupBy('duration')
+						->orderBy('duration');
+
+		$durs = $root->execute(array(), Doctrine::HYDRATE_ARRAY);
+		foreach($durs as $duration){ $durations[$duration['duration']] = $duration['duration']; }
+		return $durations;
+	}
+
+	public static function getSalaryBenefits()
+	{
+		$salary_benefits = array();
+
+		$root = Doctrine_Query::create()
+						->select('salary_benefits')
+						->from('sbJobBoardJob')
+						->groupBy('salary_benefits')
+						->orderBy('salary_benefits');
+
+		$bens = $root->execute(array(), Doctrine::HYDRATE_ARRAY);
+		foreach($bens as $benefit){ $salary_benefits[$benefit['salary_benefits']] = $benefit['salary_benefits']; }
+		return $salary_benefits;
+	}
+
 	public static function getSectors()
 	{
 		$sectors = array();

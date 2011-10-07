@@ -30,3 +30,11 @@ sb_job_board_autocomplete_titles:
 sb_job_board_autocomplete_locations:
   url: /job-autocomplete/locations
   param: { module: sbJobBoardJobAjax, action: ajaxJobLocations }
+  
+sb_job_board_autocomplete_durations:
+  url: /job-autocomplete/durations
+  param: { module: sbJobBoardJobAjax, action: ajaxJobDurations }
+  
+sb_job_board_autocomplete_salary_benefits:
+  url: /job-autocomplete/salary_benefits
+  param: { module: sbJobBoardJobAjax, action: ajaxJobSalaryBenefits }

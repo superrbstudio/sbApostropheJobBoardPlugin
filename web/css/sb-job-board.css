@@ -25,3 +25,18 @@
 	font-size: 24px;
 }
 
+.a-admin-generator.sbJobBoardJobAdmin h2.a-admin-title {
+	padding-bottom: 20px;
+}
+
+.a-admin-generator.sbJobBoardJobAdmin input.large-input {
+	width: 400px;
+}
+
+.a-admin-generator.sbJobBoardJobAdmin input.medium-input {
+	width: 300px;
+}
+
+.a-admin-generator.sbJobBoardJobAdmin input.small-input {
+	width: 150px;
+}
