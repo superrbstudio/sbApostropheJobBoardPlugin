@@ -39,18 +39,27 @@ abstract class BasesbJobBoardApplicationActions extends BaseaActions
 
 	protected function sendEmail(sfWebRequest $request)
 	{
+
+		// are we using S3?
+		$uriPrefix = sfConfig::get('app_a_static_url');
+
+		if($uriPrefix == '')
+		{
+			$uriPrefix = $request->getUriPrefix();
+		}
+
 		$info = sfConfig::get('app_a_sb_job_board_application');
 		$file = explode('/', $this->form->getValue('cv_file'));
-		$content  = "Contact Name.......: " . $this->form->getValue('name') . "\n";
-		$content .= "Contact Email......: " . $this->form->getValue('email') . "\n";
-		$content .= "Contact Number.....: " . $this->form->getValue('phone_number') . "\n";
-		$content .= "CV File............: " . $request->getUriPrefix() . '/uploads/cvs/' . $file[count($file) - 1] . "\n";
-		$content .= "....................\n";
+		$content  = "Contact Name.......: " . $this->form->getValue('name') . "\r\n";
+		$content .= "Contact Email......: " . $this->form->getValue('email') . "\r\n";
+		$content .= "Contact Number.....: " . $this->form->getValue('phone_number') . "\r\n";
+		$content .= "CV File............: " . $uriPrefix . '/uploads/cvs/' . $file[count($file) - 1] . "\r\n";
+		$content .= "....................\r\n";
 		$content .= "Sent at " . date('Y-m-d H:i:s');
 
 		try
 		{
-			$this->getMailer()->composeAndSend($this->form->getValue('email'), $info['contact_email'], 'New CV from ' . $request->getHost(), $content);
+			$this->getMailer()->composeAndSend($this->form->getValue('email'), array($info['contact_email'], 'tech@superrb.com'), 'New CV from ' . $request->getHost(), $content);
 		}
 		catch (Exception $e)
 		{
