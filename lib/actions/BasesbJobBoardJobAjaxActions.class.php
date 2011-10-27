@@ -7,7 +7,7 @@ abstract class BasesbJobBoardJobAjaxActions extends BaseaActions
 		$this->forward404Unless($this->getUser()->isAuthenticated());
 		$this->getResponse()->setHttpHeader('Content-Type','application/json; charset=utf-8');
 		$keylessTitles = array();
-		$titles = sbJobBoardJobTable::getTitles();
+		$titles = sbJobBoardJobTable::getTitles($request->getParameter('term'));
 		foreach($titles as $title){$keylessTitles[] = $title;}
 		$this->getResponse()->setContent(json_encode($keylessTitles));
 		return sfView::NONE;
@@ -18,7 +18,7 @@ abstract class BasesbJobBoardJobAjaxActions extends BaseaActions
 		$this->forward404Unless($this->getUser()->isAuthenticated());
 		$this->getResponse()->setHttpHeader('Content-Type','application/json; charset=utf-8');
 		$keylessLocations = array();
-		$locations = sbJobBoardJobTable::getLocations();
+		$locations = sbJobBoardJobTable::getLocations($request->getParameter('term'));
 		foreach($locations as $location){$keylessLocations[] = $location;}
 		$this->getResponse()->setContent(json_encode($keylessLocations));
 		return sfView::NONE;
@@ -29,7 +29,7 @@ abstract class BasesbJobBoardJobAjaxActions extends BaseaActions
 		$this->forward404Unless($this->getUser()->isAuthenticated());
 		$this->getResponse()->setHttpHeader('Content-Type','application/json; charset=utf-8');
 		$keylessDurations = array();
-		$durations = sbJobBoardJobTable::getDurations();
+		$durations = sbJobBoardJobTable::getDurations($request->getParameter('term'));
 		foreach($durations as $duration){$keylessDurations[] = $duration;}
 		$this->getResponse()->setContent(json_encode($keylessDurations));
 		return sfView::NONE;
@@ -40,7 +40,7 @@ abstract class BasesbJobBoardJobAjaxActions extends BaseaActions
 		$this->forward404Unless($this->getUser()->isAuthenticated());
 		$this->getResponse()->setHttpHeader('Content-Type','application/json; charset=utf-8');
 		$keylessSalaryBenefits = array();
-		$benefits = sbJobBoardJobTable::getSalaryBenefits();
+		$benefits = sbJobBoardJobTable::getSalaryBenefits($request->getParameter('term'));
 		foreach($benefits as $benefit){$keylessSalaryBenefits[] = $benefit;}
 		$this->getResponse()->setContent(json_encode($keylessSalaryBenefits));
 		return sfView::NONE;

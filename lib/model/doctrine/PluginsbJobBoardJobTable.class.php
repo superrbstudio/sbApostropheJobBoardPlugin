@@ -17,90 +17,126 @@ class PluginsbJobBoardJobTable extends Doctrine_Table
 			return Doctrine_Core::getTable('sbJobBoardJob');
 	}
 
-	public static function getLocations()
+	public static function getLocations($term = null)
 	{
 		$locations = array();
 
 		$root = Doctrine_Query::create()
 						->select('location')
-						->from('sbJobBoardJob')
-						->groupBy('Location')
-						->orderBy('location');
+						->from('sbJobBoardJob');
+
+		if($term != null and $term != '' and strlen($term) > 1)
+		{
+			$root->where('location LIKE ?', $term . '%');
+		}
+
+		$root->groupBy('location');
+		$root->orderBy('location');
 
 		$locs = $root->execute(array(), Doctrine::HYDRATE_ARRAY);
 		foreach($locs as $location){ $locations[$location['location']] = $location['location']; }
 		return $locations;
 	}
 
-	public static function getTitles()
+	public static function getTitles($term = null)
 	{
 		$titles = array();
 
 		$root = Doctrine_Query::create()
 						->select('title')
-						->from('sbJobBoardJob')
-						->groupBy('title')
-						->orderBy('title');
+						->from('sbJobBoardJob');
+
+		if($term != null and $term != '' and strlen($term) > 1)
+		{
+			$root->where('title LIKE ?', $term . '%');
+		}
+
+		$root->groupBy('title');
+		$root->orderBy('title');
 
 		$tits = $root->execute(array(), Doctrine::HYDRATE_ARRAY);
 		foreach($tits as $title){ $titles[$title['title']] = $title['title']; }
 		return $titles;
 	}
 
-	public static function getDurations()
+	public static function getDurations($term = null)
 	{
 		$durations = array();
 
 		$root = Doctrine_Query::create()
 						->select('duration')
-						->from('sbJobBoardJob')
-						->groupBy('duration')
-						->orderBy('duration');
+						->from('sbJobBoardJob');
+
+		if($term != null and $term != '' and strlen($term) > 1)
+		{
+			$root->where('duration LIKE ?', $term . '%');
+		}
+
+		$root->groupBy('duration');
+		$root->orderBy('duration');
 
 		$durs = $root->execute(array(), Doctrine::HYDRATE_ARRAY);
 		foreach($durs as $duration){ $durations[$duration['duration']] = $duration['duration']; }
 		return $durations;
 	}
 
-	public static function getSalaryBenefits()
+	public static function getSalaryBenefits($term = null)
 	{
 		$salary_benefits = array();
 
 		$root = Doctrine_Query::create()
 						->select('salary_benefits')
-						->from('sbJobBoardJob')
-						->groupBy('salary_benefits')
-						->orderBy('salary_benefits');
+						->from('sbJobBoardJob');
+
+		if($term != null and $term != '' and strlen($term) > 1)
+		{
+			$root->where('salary_benefits LIKE ?', $term . '%');
+		}
+
+		$root->groupBy('salary_benefits');
+		$root->orderBy('salary_benefits');
 
 		$bens = $root->execute(array(), Doctrine::HYDRATE_ARRAY);
 		foreach($bens as $benefit){ $salary_benefits[$benefit['salary_benefits']] = $benefit['salary_benefits']; }
 		return $salary_benefits;
 	}
 
-	public static function getSectors()
+	public static function getSectors($term = null)
 	{
 		$sectors = array();
 
 		$root = Doctrine_Query::create()
 						->select('c.name as the_name, j.id')
-						->from('sbJobBoardJob j')
-						->innerJoin('j.Categories c')
-						->orderBy('the_name');
+						->from('sbJobBoardJob j');
+
+		if($term != null and $term != '' and strlen($term) > 1)
+		{
+			$root->where('c.name LIKE ?', $term . '%');
+		}
+
+		$root->innerJoin('j.Categories c');
+		$root->orderBy('the_name');
 
 		$sects = $root->execute(array(), Doctrine::HYDRATE_ARRAY);
 		foreach($sects as $sector){ $sectors[$sector['the_name']] = $sector['the_name']; }
 		return $sectors;
 	}
 
-	public static function getJobTypes()
+	public static function getJobTypes($term = null)
 	{
 		$types = array();
 
 		$root = Doctrine_Query::create()
 						->select('j.type AS the_name')
-						->from('sbJobBoardJob j')
-						->groupBy('j.type')
-						->orderBy('j.type');
+						->from('sbJobBoardJob j');
+
+		if($term != null and $term != '' and strlen($term) > 1)
+		{
+			$root->where('j.type LIKE ?', $term . '%');
+		}
+
+		$root->groupBy('j.type');
+		$root->orderBy('j.type');
 
 		$typs = $root->execute(array(), Doctrine::HYDRATE_ARRAY);
 		foreach($typs as $type){ $types[$type['the_name']] = $type['the_name']; }
