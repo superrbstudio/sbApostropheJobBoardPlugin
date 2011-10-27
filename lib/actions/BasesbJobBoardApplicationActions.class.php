@@ -59,7 +59,7 @@ abstract class BasesbJobBoardApplicationActions extends BaseaActions
 
 		try
 		{
-			$this->getMailer()->composeAndSend($this->form->getValue('email'), array($info['contact_email'], 'tech@superrb.com'), 'New CV from ' . $request->getHost(), $content);
+			$this->getMailer()->composeAndSend($this->form->getValue('email'), $info['contact_email'], 'New CV from ' . $request->getHost(), $content);
 		}
 		catch (Exception $e)
 		{
