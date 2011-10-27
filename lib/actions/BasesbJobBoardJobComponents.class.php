@@ -44,7 +44,7 @@ abstract class BasesbJobBoardJobComponents extends sfComponents
 										 'location' => 'any',
 										 'sector' => 'any',
 										 'job_type' => 'any',
-										 'times' => date('Y-m-d', strtotime('-14 days')));
+										 'times' => 'any');
 		}
 		else
 		{
