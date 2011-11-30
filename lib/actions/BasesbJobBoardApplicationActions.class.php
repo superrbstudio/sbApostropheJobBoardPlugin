@@ -54,7 +54,7 @@ abstract class BasesbJobBoardApplicationActions extends BaseaActions
 		$content .= "Contact Email......: " . $this->form->getValue('email') . "\r\n";
 		$content .= "Contact Number.....: " . $this->form->getValue('phone_number') . "\r\n";
 		$content .= "CV File............: " . $uriPrefix . '/uploads/cvs/' . $file[count($file) - 1] . "\r\n";
-		$content .= "Message............:\r'n " . $this->form->getValue('job_type') . "\r\n";
+		$content .= "Message............:\r\n " . $this->form->getValue('job_type') . "\r\n";
 		$content .= "....................\r\n";
 		$content .= "Sent at " . date('Y-m-d H:i:s');
 
