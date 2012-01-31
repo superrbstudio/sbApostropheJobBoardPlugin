@@ -264,7 +264,11 @@ class PluginsbJobBoardJobTable extends Doctrine_Table
 				break;
 
 			case 'usd':
-				return '$';
+				return 'USD $';
+				break;
+			
+			case 'chf':
+				return 'CHF SFr';
 				break;
 		}
 

@@ -42,7 +42,7 @@ sbJobBoardJob:
       type: string(255)
     salary_currency:
       type: enum
-      values: [ gbp, eur, usd ]
+      values: [ gbp, eur, usd, chf ]
       default: gbp
     salary_from:
       type: float
