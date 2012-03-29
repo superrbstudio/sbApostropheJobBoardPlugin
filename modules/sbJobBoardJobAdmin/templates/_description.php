@@ -7,6 +7,7 @@
 
 $edit = true;
 ?>
+<?php if(!sfConfig::get('app_sbJobBoard_use_description_area', false)): ?>
 <hr/>
 <h3 class="job-board-description">Job Description</h3>
 <?php a_area('jobDescription', array(
@@ -16,3 +17,4 @@ $edit = true;
 	    'aRichText' => array('tool' => 'Main'),
 	))) ?>
 <hr/>
+<?php endif; ?>
