@@ -50,6 +50,7 @@ abstract class BasesbJobBoardApplicationActions extends BaseaActions
 
 		$info = sfConfig::get('app_a_sb_job_board_application');
 		$file = explode('/', $this->form->getValue('cv_file'));
+    $subject  = 'New CV from ' . $request->getHost();
 		$content  = "Contact Name.......: " . $this->form->getValue('name') . "\r\n";
 		$content .= "Contact Email......: " . $this->form->getValue('email') . "\r\n";
 		$content .= "Contact Number.....: " . $this->form->getValue('phone_number') . "\r\n";
@@ -57,10 +58,18 @@ abstract class BasesbJobBoardApplicationActions extends BaseaActions
 		$content .= "Message............:\r\n " . $this->form->getValue('job_type') . "\r\n";
 		$content .= "....................\r\n";
 		$content .= "Sent at " . date('Y-m-d H:i:s');
-
-		try
+    
+    try
 		{
-			$this->getMailer()->composeAndSend($this->form->getValue('email'), $info['contact_email'], 'New CV from ' . $request->getHost(), $content);
+      $message = $this->getMailer()->compose();
+      $message->setSubject($subject);
+      $message->setTo($info['contact_email_to']);
+      $message->setBcc($info['contact_email_bcc']);
+      $message->setFrom($info['contact_email_from']);
+      $message->setReplyTo(array($this->form->getValue('email') => $this->form->getValue('name')));
+      $message->setBody($content);
+      
+      $this->getMailer()->send($message);
 		}
 		catch (Exception $e)
 		{
