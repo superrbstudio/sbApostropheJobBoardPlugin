@@ -28,7 +28,10 @@ abstract class PluginsbJobBoardJobForm extends BasesbJobBoardJobForm
 		$this->setWidget('location', new sbApostropheJQueryInputAutocomplete(array('source' => url_for('@sb_job_board_autocomplete_locations')), array('class' => 'large-input')));
 		$this->setValidator('location', new sfValidatorString(array('required' => true), array()));
 
-		$this->setWidget('startdate', new sfWidgetFormJQueryDate(array('image' => '/sbApostropheJobBoardPlugin/images/calendar_icon.jpg', 'date_widget' => new sfWidgetFormDate(array('years' => array_combine($years, $years), 'format' => '%day%%month%%year%')), 'default' => 'today'), array('class' => 'quotefield')));
+		//$this->setWidget('startdate', new sfWidgetFormJQueryDate(array('image' => '/sbApostropheJobBoardPlugin/images/calendar_icon.jpg', 'date_widget' => new sfWidgetFormDate(array('can_be_empty' => false, 'years' => array_combine($years, $years), 'format' => '%day%%month%%year%')), 'default' => 'today'), array('class' => 'quotefield')));
+    $this->setWidget('startdate', new sfWidgetFormDate(array('label' => 'Start date', 'can_be_empty' => false, 'years' => array_combine($years, $years), 'format' => '%day%%month%%year%', 'default' => 'today')));
+    $this->setValidator('startdate', new sfValidatorDate(array('required' => true)));
+    //$this->setWidget('startdate', new aWidgetFormJQueryDate(array()));
 
 		$this->setWidget('salary_benefits', new sbApostropheJQueryInputAutocomplete(array('source' => url_for('@sb_job_board_autocomplete_salary_benefits')), array('class' => 'large-input')));
 
