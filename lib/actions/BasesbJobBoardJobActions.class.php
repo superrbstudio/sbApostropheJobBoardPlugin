@@ -33,6 +33,7 @@ abstract class BasesbJobBoardJobActions extends aEngineActions
 		$this->edit = $this->getUser()->isAuthenticated();
 		$this->job = sbJobBoardJobTable::getInstance()->findOneBySlug($request->getParameter('slug'));
 		$this->forward404Unless($this->job instanceof sbJobBoardJob);
+    $this->forward404Unless($this->job->getActive());
 
 		$prefix = aTools::getOptionI18n('title_prefix');
     $suffix = aTools::getOptionI18n('title_suffix');
