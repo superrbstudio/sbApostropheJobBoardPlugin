@@ -27,6 +27,7 @@ sbJobBoardJob:
     reference:
       type: string(255)
       notnull: true
+      unique: true
     title:
       type: string(255)
       notnull: true

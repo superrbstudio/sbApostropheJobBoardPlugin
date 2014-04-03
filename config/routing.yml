@@ -2,6 +2,11 @@ sb_job_board_index:
   url: /
   param: { module: sbJobBoardJob, action: index }
   class: aRoute
+
+sb_job_board_post:
+  url: /post
+  param: { module: sbJobBoardJob, action: post }
+  class: aRoute
   
 sb_job_board_job_page:
   url: /:slug
