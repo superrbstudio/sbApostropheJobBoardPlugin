@@ -43,38 +43,32 @@ abstract class BasesbJobBoardJobActions extends aEngineActions
 
     public function executePost(sfWebRequest $request)
     {
-        $apiId  = $request->getParameter('api_id');
-        $apiKey = $request->getParameter('api_key');
+        $apiId  = $request->getPostParameter('api_id');
+        $apiKey = $request->getPostParameter('api_key');
         $keys   = sfConfig::get('app_a_sb_job_board');
-        var_dump($apiId);
-        var_dump($keys['api_id']);
-        var_dump($apiKey);
-        var_dump($keys['api_key']);
-
-
         $this->getResponse()->setHttpHeader('Content-type','application/json');
 
-        if($apiId and $apiKey and $apiId == $keys['api_id'] and $apiKey == $keys['api_key'])
+        if($apiId and $apiKey and $apiId == $keys['api_id'] and $apiKey == $keys['api_key'] and $request->isMethod(sfRequest::POST))
         {
             $details = array(
-                'featured' => $request->getParameter('featured'),
-                'reference' => $request->getParameter('reference'),
-                'active' => $request->getParameter('active'),
-                'featured' => $request->getParameter('featured'),
-                'title' => $request->getParameter('title'),
-                'type' => $request->getParameter('type'),
-                'duration' => $request->getParameter('duration'),
-                'startdate' => $request->getParameter('startdate'),
-                'location' => $request->getParameter('location'),
-                'salary_currency' => $request->getParameter('salary_currency'),
-                'salary_from' => $request->getParameter('salary_from'),
-                'salary_to' => $request->getParameter('salary_to'),
-                'salary_per' => $request->getParameter('salary_per'),
-                'salary_benefits' => $request->getParameter('salary_benefits'),
+                'featured' => $request->getPostParameter('featured'),
+                'reference' => $request->getPostParameter('reference'),
+                'active' => $request->getPostParameter('active'),
+                'featured' => $request->getPostParameter('featured'),
+                'title' => $request->getPostParameter('title'),
+                'type' => $request->getPostParameter('type'),
+                'duration' => $request->getPostParameter('duration'),
+                'startdate' => $request->getPostParameter('startdate'),
+                'location' => $request->getPostParameter('location'),
+                'salary_currency' => $request->getPostParameter('salary_currency'),
+                'salary_from' => $request->getPostParameter('salary_from'),
+                'salary_to' => $request->getPostParameter('salary_to'),
+                'salary_per' => $request->getPostParameter('salary_per'),
+                'salary_benefits' => $request->getPostParameter('salary_benefits'),
             );
 
             // work out tags
-            $tags = explode(',', $request->getParameter('tags'));
+            $tags = explode(',', $request->getPostParameter('tags'));
             $saveTags = array();
 
             if(is_array($tags) and count($tags) > 0)
@@ -91,7 +85,7 @@ abstract class BasesbJobBoardJobActions extends aEngineActions
             }
 
             // work out categories
-            $categories = explode(',', $request->getParameter('categories'));
+            $categories = explode(',', $request->getPostParameter('categories'));
             $categoryCollection = new Doctrine_Collection('aCategory');
 
             if(is_array($categories) and count($categories) > 0)
