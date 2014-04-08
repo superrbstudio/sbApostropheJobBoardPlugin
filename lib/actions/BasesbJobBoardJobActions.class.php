@@ -114,7 +114,7 @@ abstract class BasesbJobBoardJobActions extends aEngineActions
                 $job->setFeatured($details['featured']);
                 $job->setReference($details['reference']);
                 $job->setActive($details['active']);
-                $job->setFeatured($details['featured']),
+                $job->setFeatured($details['featured']);
                 $job->setTitle($details['title']);
                 $job->setType($details['type']);
                 $job->setDuration($details['duration']);
