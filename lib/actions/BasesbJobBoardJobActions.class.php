@@ -132,21 +132,24 @@ abstract class BasesbJobBoardJobActions extends aEngineActions
                 $job->save();
 
                 // find the description area
-                $slug = aPageTable::getFirstEnginePage('sbJobBoardJob')->slug . "/" . $job->getSlug();
-                $page = new aPage();
-                $page->setSlug($slug);
-                $page->save();
-                $page = aPageTable::retrieveBySlugWithSlots($slug);
+                if($description)
+                {
+                    $slug = aPageTable::getFirstEnginePage('sbJobBoardJob')->slug . "/" . $job->getSlug();
+                    $page = new aPage();
+                    $page->setSlug($slug);
+                    $page->save();
+                    $page = aPageTable::retrieveBySlugWithSlots($slug);
 
-                $slot = $page->createSlot('aRichText');
-                $slot->value = $description;
-                $slot->save();
+                    $slot = $page->createSlot('aRichText');
+                    $slot->value = $description;
+                    $slot->save();
 
-                $page->newAreaVersion('jobDescription', 'add', array(
-                    'slot' => $slot,
-                ));
+                    $page->newAreaVersion('jobDescription', 'add', array(
+                        'slot' => $slot,
+                    ));
 
-                $page->save();
+                    $page->save();
+                }
 
                 echo json_encode(array('success' => true));
             }
