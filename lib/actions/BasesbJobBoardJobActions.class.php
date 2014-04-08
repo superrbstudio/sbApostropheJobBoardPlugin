@@ -54,6 +54,8 @@ abstract class BasesbJobBoardJobActions extends aEngineActions
             $details = array(
                 'featured' => $request->getParameter('featured'),
                 'reference' => $request->getParameter('reference'),
+                'active' => $request->getParameter('active'),
+                'featured' => $request->getParameter('featured'),
                 'title' => $request->getParameter('title'),
                 'type' => $request->getParameter('type'),
                 'duration' => $request->getParameter('duration'),
@@ -64,12 +66,44 @@ abstract class BasesbJobBoardJobActions extends aEngineActions
                 'salary_to' => $request->getParameter('salary_to'),
                 'salary_per' => $request->getParameter('salary_per'),
                 'salary_benefits' => $request->getParameter('salary_benefits'),
-                'tags' => $request->getParameter('tags'),
-                'categories_list' => $request->getParameter('categories'),
             );
 
             // work out tags
+            $tags = explode(',', $request->getParameter('tags'));
+            $saveTags = array();
 
+            if(is_array($tags) and count($tags) > 0)
+            {
+                foreach($tags as $tag)
+                {
+                    // strip spaces from beginning or end
+                    if(substr($tag, 0, 1) == ' ') { $tag = substr_replace($tag, '', 0, 1); }
+                    if(substr($tag, strlen($tag), -1) == ' ') { $tag = substr_replace($tag, '', strlen($tag), -1); }
+                    $dbTag = Doctrine_Core::getTable('Tag')->findOneByName($tag);
+                    if(!$dbTag) { $dbTag = new Tag(); $dbTag->setName($tag); $dbTag->setIsTriple(false); $dbTag->save(); }
+                    $saveTags[] = $dbTag->getName();
+                }
+            }
+
+            // work out categories
+            $categories = explode(',', $request->getParameter('categories'));
+            $categoryCollection = new Doctrine_Collection('aCategory');
+
+            if(is_array($categories) and count($categories) > 0)
+            {
+                foreach($categories as $category)
+                {
+                    if(substr($category, 0, 1) == ' ') { $category = substr_replace($category, '', 0, 1); }
+                    if(substr($category, strlen($category), -1) == ' ') { $category = substr_replace($category, '', strlen($category), -1); }
+                    $dbCategory = aCategoryTable::getInstance()->findOneByName($category);
+                    if(!$dbCategory) { $dbCategory = new aCategory(); $dbCategory->setName($category); $dbCategory->save(); }
+                    $categoryCollection->add($dbCategory);
+                }
+            }
+            else
+            {
+                $categoryCollection = null;
+            }
 
             $form = new sbJobBoardPostJobForm();
             $form->bind($details);
@@ -79,6 +113,8 @@ abstract class BasesbJobBoardJobActions extends aEngineActions
                 $job = new sbJobBoardJob();
                 $job->setFeatured($details['featured']);
                 $job->setReference($details['reference']);
+                $job->setActive($details['active']);
+                $job->setFeatured($details['featured']),
                 $job->setTitle($details['title']);
                 $job->setType($details['type']);
                 $job->setDuration($details['duration']);
@@ -88,6 +124,9 @@ abstract class BasesbJobBoardJobActions extends aEngineActions
                 $job->setSalaryFrom($details['salary_from']);
                 $job->setSalaryTo($details['salary_to']);
                 $job->setSalaryBenefits($details['salary_benefits']);
+                $job->addTag($saveTags);
+                if($categoryCollection) { $job->setCategories($categoryCollection); }
+
                 $job->save();
 
                 echo json_encode(array('success' => true));
