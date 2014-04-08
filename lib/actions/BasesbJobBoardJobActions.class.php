@@ -17,6 +17,9 @@ abstract class BasesbJobBoardJobActions extends aEngineActions
     */
     public function executeIndex(sfWebRequest $request)
     {
+        // de-activate any jobs that are active and more than 3 months old.
+        sbJobBoardJobTable::deactivateOldJobs(3);
+
         $params = array();
 
         // are there parameters

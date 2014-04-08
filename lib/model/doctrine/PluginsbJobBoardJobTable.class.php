@@ -289,4 +289,17 @@ class PluginsbJobBoardJobTable extends Doctrine_Table
     $q->addOrderBy('aCategory.name');
     return $q;
   }
+
+    public static function deactivateOldJobs($months)
+    {
+        $date = new \DateTime();
+        $date->modify('-' . $months . ' months');
+
+        return Doctrine_Query::create()
+            ->update('sbJobBoardJob j')
+            ->set('j.active', '0')
+            ->where('j.active = 1')
+            ->andWhere('j.updated_at <= \'' . $date->format('Y-m-d') . '\'')
+            ->execute();
+    }
 }
