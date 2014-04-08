@@ -46,6 +46,11 @@ abstract class BasesbJobBoardJobActions extends aEngineActions
         $apiId  = $request->getParameter('api_id');
         $apiKey = $request->getParameter('api_key');
         $keys   = sfConfig::get('app_a_sb_job_board');
+        var_dump($apiId);
+        var_dump($keys['api_id']);
+        var_dump($apiKey);
+        var_dump($keys['api_key']);
+
 
         $this->getResponse()->setHttpHeader('Content-type','application/json');
 
