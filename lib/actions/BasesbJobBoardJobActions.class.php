@@ -127,6 +127,7 @@ abstract class BasesbJobBoardJobActions extends aEngineActions
                 $job->setlocation($details['location']);
                 $job->setSalaryCurrency($details['salary_currency']);
                 $job->setSalaryFrom($details['salary_from']);
+                $job->setSalaryPer($details['salary_per']);
                 $job->setSalaryTo($details['salary_to']);
                 $job->setSalaryBenefits($details['salary_benefits']);
                 $job->addTag($saveTags);
