@@ -29,7 +29,7 @@ generator:
         display:  [ reference, title, type, location, active, featured ]
       form:    ~
       edit:
-        title:    "Edit %%title%%"
+        title:    "Edit Job"
         display:
           Job Status: [ active, featured]
           Job Details: [ reference, title, type, duration, startdate, location ]
